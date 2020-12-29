@@ -26,6 +26,8 @@
             owner: root
             group: root
             mode: '0755'
+        - name: Install velero
+          shell: velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file "{{ vault_secret }}"
       become: true
   when: >
     velero_installed_version.stdout is not defined
