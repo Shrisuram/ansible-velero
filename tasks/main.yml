@@ -28,9 +28,9 @@
                               secret_id={{ secret_id }}
                               url={{ vault_server }}
                              ') }}"
-                             
+
 - name: Install Velero for Azure
   become_user: hl
   become_method: sudo
   become: yes
-  shell: velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file={{vault_secret}} 
+  shell: velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file="{{vault_secret}}" 
