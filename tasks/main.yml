@@ -32,9 +32,9 @@
             mode: '0755'
         - name: "tyasfdtqwy"
           shell: sudo apt install linuxbrew-wrapper
-          owner: root
-          group: root
-          mode: '0755'
+          become: true
+          become_method: su
+          become_user: nobody
         become: true  
         #- name: sadfas
          # shell: cp {{ velero_pkg }} /usr/local/bin/velero
