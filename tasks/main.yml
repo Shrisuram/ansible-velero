@@ -24,11 +24,7 @@
 - name: Copy cloud_credentials.ini
   copy:
     src: "{{vault_secret}}"
-    dest: /home/{{ ansible_user }}/.secrets/backup-cloud-credentials.ini
-    owner: hl
-    mode: 0644
-
-
+    dest: /home/{{ ansible_user }}/.secrets/{{vault_secret}}
 
 - name: Install Velero for Azure
   become_user: hl
