@@ -31,7 +31,7 @@
             group: root
             mode: '0755'
         - name: "tyasfdtqwy"
-          shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+          shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
           #become_method: root
           become_user: root
         #- name: sadfas
