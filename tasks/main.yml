@@ -13,7 +13,7 @@
         checksum: "{{ velero_checksum }}"
     - name: install Brew
       apt:
-        name: linuxbrew-wrapper 
+        name: brew 
       become_user: yes
     - block:
         - name: unarchive
@@ -29,6 +29,10 @@
             owner: root
             group: root
             mode: '0755'
+        - name: "tyasfdtqwy"
+          shell: chmod +x velero
+        - name: sadfas
+          shell: cp velero /usr/local/bin/velero
         - name: write creds.json
           copy:
             content: "{{ vault_secret }}"
