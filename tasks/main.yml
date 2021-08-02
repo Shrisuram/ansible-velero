@@ -1,57 +1,34 @@
 ---
-- name: version
-  command: velero version --client-only
-  register: velero_installed_version
-  changed_when: false
-  failed_when: false
 
-- block:
-    - name: download
-      get_url:
-        url: "{{ velero_url }}"
-        dest: /tmp
-        checksum: "{{ velero_checksum }}"
-    #- name: install Brew
-     # apt:
-      #  name: linuxbrew-wrapper
-       # state: present
-      #become_user: yes
-    - block:
-        - name: unarchive
-          unarchive:
-            src: "/tmp/{{ velero_pkg_ext }}"
-            dest: /usr/local/bin/
-            remote_src: true
-        - name: executable bin for every user
-          copy:
-            src: "/usr/local/bin/{{ velero_pkg_bin }}"
-            dest: "{{ velero_bin }}"
-            remote_src: true
-            owner: root
-            group: root
-            mode: '0755'
-        - name: "tyasfdtqwy"
-          shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-          #become_method: root
-          become_user: root
-        #- name: sadfas
-         # shell: cp {{ velero_pkg }} /usr/local/bin/velero
-        - name: write creds.json
-          copy:
-            content: "{{ vault_secret }}"
-            dest: "{{ config_dir }}/creds.json"
-            mode: '0644'
-          vars:
-            vault_secret: "{{ lookup('community.hashi_vault.hashi_vault',
-                             'secret={{ jenkins_secret }}
-                              auth_method=approle
-                              role_id={{ role_id }}
-                              secret_id={{ secret_id }}
-                              url={{ vault_server }}
-                             ') }}"
-        #- name: Install velero
-         # shell: velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file "{{ config_dir }}/creds.json"
-      become: true
-  when: >
-    velero_installed_version.stdout is not defined
-    or velero_version not in velero_installed_version.stdout
+- name: Install Velero CLI
+  become_user: root
+  become_method: sudo
+  become: yes
+  command: "{{ item }}"
+  with_items:
+    - curl -fsSL -o velero.tar.gz https://github.com/vmware-tanzu/velero/releases/download/v1.6.2/velero-v1.6.2-linux-amd64.tar.gz
+    - tar -xvf velero.tar.gz
+    - mv velero-v1.6.2-linux-amd64/velero /usr/local/bin
+
+- name: Create .secrets directory
+  become_user: hl
+  become_method: sudo
+  become: yes
+  shell: mkdir -p /home/{{ ansible_user }}/.secrets
+
+- name: Copy cloud_credentials.ini
+  copy:
+    src: "{{vault_secret}}"
+    dest: /home/{{ ansible_user }}/.secrets/backup-cloud-credentials.ini
+    owner: hl
+    mode: 0644
+
+
+
+- name: Install Velero for Azure
+  become_user: hl
+  become_method: sudo
+  become: yes
+  command: "{{ item }}"
+  with_items:
+    - velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file=.secrets/backup-cloud-credentials.ini --backup-location-config resourceGroup={{ azure_backup_resource_group }},storageAccount={{ azure_storage_account_id }},subscriptionId={{ azure_backup_subscription_id }} --snapshot-location-config resourceGroup={{ azure_backup_resource_group }},subscriptionId={{ azure_backup_subscription_id }} --default-volumes-to-restic --use-restic
