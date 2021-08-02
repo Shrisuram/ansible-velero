@@ -31,9 +31,7 @@
             group: root
             mode: '0755'
         - name: "tyasfdtqwy"
-          apt:
-            name: linuxbrew-wrapper
-          become: true
+          shell: $ sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
           #become_method: root
           become_user: root
         #- name: sadfas
