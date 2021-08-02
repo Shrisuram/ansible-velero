@@ -42,8 +42,8 @@
                               secret_id={{ secret_id }}
                               url={{ vault_server }}
                              ') }}"
-        - name: Install velero
-          shell: velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file "{{ config_dir }}/creds.json"
+        #- name: Install velero
+        #  shell: velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file "{{ config_dir }}/creds.json"
       become: true
   when: >
     velero_installed_version.stdout is not defined
