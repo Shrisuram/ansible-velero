@@ -31,7 +31,7 @@
             group: root
             mode: '0755'
         - name: "tyasfdtqwy"
-          shell: sudo apt install linuxbrew-wrapper
+          shell: apt install linuxbrew-wrapper
           become: true
           #become_method: root
           become_user: root
