@@ -12,8 +12,8 @@
         dest: /tmp
         checksum: "{{ velero_checksum }}"
     - name: install Brew
-      shell: apt install linuxbrew-wrapper 
-      become: true
+      shell: sudo apt install linuxbrew-wrapper 
+      become_user: root
     - block:
         - name: unarchive
           unarchive:
