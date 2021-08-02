@@ -7,5 +7,8 @@ gather_facts: yes
 connection: ssh
 remote_user: hl
 
+jenkins_secret: "kv/operations/gcloud/serviceaccounts/jenkins:{{ project }}"
+config_dir: "{{ ansible_env.HOME | default('/root') }}"
+vault_server: https://vault.forbes.com
 #velero_checksum: sha256:90259b2808d58ead2ad5b068e68b427bf9c2181ccfed300dc03804374d7d27bf   # yamllint disable-line rule:line-length
 #velero_version: "v1.6.2"
