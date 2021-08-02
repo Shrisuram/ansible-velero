@@ -11,11 +11,11 @@
         url: "{{ velero_url }}"
         dest: /tmp
         checksum: "{{ velero_checksum }}"
-    - name: install Brew
-      apt:
-        name: linuxbrew-wrapper
-        state: present
-      become_user: yes
+    #- name: install Brew
+     # apt:
+      #  name: linuxbrew-wrapper
+       # state: present
+      #become_user: yes
     - block:
         - name: unarchive
           unarchive:
