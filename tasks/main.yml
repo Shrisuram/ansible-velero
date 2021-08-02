@@ -20,4 +20,4 @@
   become_user: hl
   become_method: sudo
   become: yes
-  shell: velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file=.secrets/backup-cloud-credentials.ini --backup-location-config resourceGroup={{ azure_backup_resource_group }},storageAccount={{ azure_storage_account_id }},subscriptionId={{ azure_backup_subscription_id }} --snapshot-location-config resourceGroup={{ azure_backup_resource_group }},subscriptionId={{ azure_backup_subscription_id }} --default-volumes-to-restic --use-restic
+  shell: velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file={{vault_secret}} 
