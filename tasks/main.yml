@@ -11,7 +11,10 @@
         url: "{{ velero_url }}"
         dest: /tmp
         checksum: "{{ velero_checksum }}"
-
+    - name: install Brew
+      shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    - name: fdfs
+      shell: eval "$(/usr/local/bin/brew shellenv)"
     - block:
         - name: unarchive
           unarchive:
