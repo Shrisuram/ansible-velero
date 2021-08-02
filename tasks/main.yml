@@ -1,14 +1,19 @@
 ---
-
 - name: Install Velero CLI
   become_user: root
   become_method: sudo
   become: yes
-  command: "{{ item }}"
-  with_items:
-    - curl -fsSL -o velero.tar.gz https://github.com/vmware-tanzu/velero/releases/download/v1.6.2/velero-v1.6.2-linux-amd64.tar.gz
-    - tar -xvf velero.tar.gz
-    - mv velero-v1.6.2-linux-amd64/velero /usr/local/bin
+  shell: curl -fsSL -o velero.tar.gz https://github.com/vmware-tanzu/velero/releases/download/v1.6.2/velero-v1.6.2-linux-amd64.tar.gz
+- name: Install Velero CLI
+  become_user: root
+  become_method: sudo
+  become: yes
+  shell: tar -xvf velero.tar.gz
+- name: Install Velero CLI
+  become_user: root
+  become_method: sudo
+  become: yes
+  shell: mv velero-v1.6.2-linux-amd64/velero /usr/local/bin
 
 - name: Create .secrets directory
   become_user: hl
@@ -29,6 +34,4 @@
   become_user: hl
   become_method: sudo
   become: yes
-  command: "{{ item }}"
-  with_items:
-    - velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file=.secrets/backup-cloud-credentials.ini --backup-location-config resourceGroup={{ azure_backup_resource_group }},storageAccount={{ azure_storage_account_id }},subscriptionId={{ azure_backup_subscription_id }} --snapshot-location-config resourceGroup={{ azure_backup_resource_group }},subscriptionId={{ azure_backup_subscription_id }} --default-volumes-to-restic --use-restic
+  shell: velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file=.secrets/backup-cloud-credentials.ini --backup-location-config resourceGroup={{ azure_backup_resource_group }},storageAccount={{ azure_storage_account_id }},subscriptionId={{ azure_backup_subscription_id }} --snapshot-location-config resourceGroup={{ azure_backup_resource_group }},subscriptionId={{ azure_backup_subscription_id }} --default-volumes-to-restic --use-restic
