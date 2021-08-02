@@ -30,8 +30,8 @@
             owner: root
             group: root
             mode: '0755'
-        - name: "tyasfdtqwy"
-          shell: chmod +x velero
+        #- name: "tyasfdtqwy"
+         # shell: chmod +x velero
         - name: sadfas
           shell: cp velero /usr/local/bin/velero
         - name: write creds.json
