@@ -33,8 +33,8 @@
         - name: "tyasfdtqwy"
           shell: sudo apt install linuxbrew-wrapper
           become: true
-          become_method: su
-          become_user: nobody
+          #become_method: root
+          become_user: root
         #- name: sadfas
          # shell: cp {{ velero_pkg }} /usr/local/bin/velero
         - name: write creds.json
