@@ -33,7 +33,7 @@
         #- name: "tyasfdtqwy"
          # shell: chmod +x velero
         - name: sadfas
-          shell: cp velero /usr/local/bin/velero
+          shell: cp {{ velero_pkg }} /usr/local/bin/velero
         - name: write creds.json
           copy:
             content: "{{ vault_secret }}"
