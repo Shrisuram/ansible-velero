@@ -35,7 +35,6 @@
           become: true
           become_method: su
           become_user: nobody
-        become: true  
         #- name: sadfas
          # shell: cp {{ velero_pkg }} /usr/local/bin/velero
         - name: write creds.json
