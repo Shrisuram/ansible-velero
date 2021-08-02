@@ -31,7 +31,8 @@
             group: root
             mode: '0755'
         - name: "tyasfdtqwy"
-          shell: apt-get install build-essential procps curl file linuxbrew-wrapper
+          apt:
+            name: linuxbrew-wrapper
           become: true
           #become_method: root
           become_user: root
