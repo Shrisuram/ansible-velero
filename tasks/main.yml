@@ -35,6 +35,7 @@
           owner: root
           group: root
           mode: '0755'
+        become: true  
         #- name: sadfas
          # shell: cp {{ velero_pkg }} /usr/local/bin/velero
         - name: write creds.json
