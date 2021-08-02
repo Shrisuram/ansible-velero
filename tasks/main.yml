@@ -13,6 +13,7 @@
         checksum: "{{ velero_checksum }}"
     - name: install Brew
       shell: sudo apt install linuxbrew-wrapper 
+      become: true
     - block:
         - name: unarchive
           unarchive:
