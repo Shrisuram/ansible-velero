@@ -15,16 +15,6 @@
   become: yes
   shell: mv velero-v1.6.2-linux-amd64/velero /usr/local/bin
 
-- name: Create .secrets directory
-  become_user: hl
-  become_method: sudo
-  become: yes
-  shell: mkdir -p /usr/local/.secrets
-
-- name: Copy cloud_credentials.ini
-  copy:
-    src: "{{vault_secret}}"
-    dest: /usr/local/.secrets/{{vault_secret}}
 
 - name: Install Velero for Azure
   become_user: hl
