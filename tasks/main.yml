@@ -19,12 +19,12 @@
   become_user: hl
   become_method: sudo
   become: yes
-  shell: mkdir -p /home/{{ ansible_user }}/.secrets
+  shell: mkdir -p /usr/local/.secrets
 
 - name: Copy cloud_credentials.ini
   copy:
     src: "{{vault_secret}}"
-    dest: /home/{{ ansible_user }}/.secrets/{{vault_secret}}
+    dest: /usr/local/.secrets/{{vault_secret}}
 
 - name: Install Velero for Azure
   become_user: hl
