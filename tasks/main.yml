@@ -18,7 +18,7 @@
 - name: write creds.json
   copy:
     content: "{{ vault_secret }}"
-    dest: "{{ config_dir }}/creds.json"
+    dest: "{{ config_dir }}/velero.json"
     mode: '0644'
   vars:
     vault_secret: "{{ lookup('community.hashi_vault.hashi_vault',
@@ -33,4 +33,4 @@
   #become_user: hl
   #become_method: sudo
   #become: yes
-  shell: velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file="{{ config_dir }}/creds.json"
+  shell: velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file="{{ config_dir }}/velero.json"
