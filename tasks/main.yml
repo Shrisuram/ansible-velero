@@ -22,7 +22,7 @@
     mode: '0644'
   vars:
     vault_secret: "{{ lookup('community.hashi_vault.hashi_vault',
-                             'secret={{ jenkins_secret }}
+                             'secret=kv/data/operations/gcloud/serviceaccounts/jenkins:forbes-development
                               auth_method=approle
                               role_id={{ role_id }}
                               secret_id={{ secret_id }}
