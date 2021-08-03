@@ -22,10 +22,10 @@
     mode: '0644'
   vars:
     vault_secret: "{{ lookup('community.hashi_vault.hashi_vault',
-                             'secret={{ jenkins_secret }}
+                             'secret="kv/data/operations/velero/velero"
                               auth_method=approle
                               role_id={{ role_id }}
-                              secret_id={{ secret_id }}
+                              #secret_id={{ secret_id }}
                               url={{ vault_server }}
                              ') }}"
 
@@ -33,4 +33,4 @@
   #become_user: hl
   #become_method: sudo
   #become: yes
-  shell: velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --no-secret
+  shell: velero install --provider gcp --plugins velero/velero-plugin-for-gcp:v1.2.0 --bucket playground2-velero --secret-file="{{ config_dir }}/creds.json"
