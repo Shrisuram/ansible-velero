@@ -22,7 +22,7 @@
     mode: '0644'
   vars:
     vault_secret: "{{ lookup('community.hashi_vault.hashi_vault',
-                             'secret="kv/data/operations/velero/velero"
+                             'secret="kv/data/operations/velero:velero"
                               auth_method=approle
                               role_id={{ role_id }}
                               #secret_id={{ secret_id }}
